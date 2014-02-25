@@ -4,7 +4,7 @@
 
 (defmacro with-imap-connection ((socket) &body body)
   (with-gensyms (netrc)
-    `(let* ((,netrc (netrc:netrc-get (netrc:make-netrc) +host+))
+    `(let* ((,netrc (netrc:lookup (netrc:make-netrc) +host+))
             (,socket (make-imap :host +host+ :port (getf ,netrc :port)
                                 :ssl-p t)))
        (unwind-protect (progn
