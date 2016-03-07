@@ -1,11 +1,9 @@
 (ns yuhta.check-gmail
   (:require [clojure.string :refer [join]]
-            [yuhta.googleauth :refer [*scopes* *http-transport* authorize]])
+            [yuhta.googleauth :refer [*http-transport* authorize]])
   (:import com.google.api.client.googleapis.util.Utils
            (com.google.api.services.gmail GmailScopes Gmail$Builder))
   (:gen-class))
-
-(alter-var-root #'*scopes* conj GmailScopes/GMAIL_READONLY)
 
 (def ^:private headers '("From" "Subject"))
 (def ^:private line-sep (System/getProperty "line.separator"))
