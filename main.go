@@ -10,6 +10,7 @@ import (
 	"os"
 	"os/user"
 	"path"
+	"time"
 )
 
 func getToken(config *oauth2.Config, file string) *oauth2.Token {
@@ -77,6 +78,7 @@ func main() {
 	conf := configFromFile(path.Join(dir, "client-secret.json"))
 	tok := getToken(conf, path.Join(dir, "check-gmail.json"))
 	client := conf.Client(oauth2.NoContext, tok)
+	client.Timeout = time.Second * 60
 	srv, err := gmail.New(client)
 	if err != nil {
 		panic(err)
